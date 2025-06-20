@@ -1,14 +1,12 @@
 package org.example.librarymanagement.dao.response;
 
-import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.librarymanagement.model.Author;
 import org.example.librarymanagement.model.Category;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.core.io.Resource;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class BookResponse {
-    private String imageUrl;
+    private Resource image;
     private String title;
     private List<Author> authors;
     private List<Category> category;

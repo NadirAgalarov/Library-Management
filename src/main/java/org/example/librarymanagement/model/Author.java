@@ -23,7 +23,7 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String imageUrl;
+    private String imageName;
     private String firstLame;
     private String lastName;
     @ManyToMany(mappedBy = "authors")
