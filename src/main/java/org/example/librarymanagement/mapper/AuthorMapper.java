@@ -8,16 +8,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE,
-        nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS
+        nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
 )
 public interface AuthorMapper {
 
     @Mapping(source="image",target="imageName",qualifiedByName = "imageNameFromImage")
     Author requestToModel(AuthorRequest authorRequest);
 
-    @Mapping(target="image",source="imageName", ignore=true)
+    @Mapping(target="imageUrl",source="imageName", ignore=true)
     AuthorResponse modelToResponse(Author author);
 
     @Named("imageNameFromImage")
-    static String getImageName(MultipartFile image){return image.getOriginalFilename()+System.nanoTime();}
+    static String getImageName(MultipartFile image){return System.nanoTime()+image.getOriginalFilename();}
 }

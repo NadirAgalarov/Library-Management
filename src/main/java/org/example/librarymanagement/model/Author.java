@@ -24,7 +24,7 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String imageName;
-    private String firstLame;
+    private String firstName;
     private String lastName;
     @ManyToMany(mappedBy = "authors")
     private List<Book> books= new ArrayList<>();

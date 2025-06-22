@@ -17,8 +17,8 @@ import java.util.List;
 @Builder
 public class AuthorResponse {
     private int id;
-    private Resource image;
-    private String firstLame;
+    private String imageUrl;
+    private String firstName;
     private String lastName;
     private List<Book> books= new ArrayList<>();
 }
