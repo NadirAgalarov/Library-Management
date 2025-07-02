@@ -1,5 +1,6 @@
 package org.example.librarymanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,14 +18,17 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String imageName;
     private String firstName;
     private String lastName;
-    @ManyToMany(mappedBy = "authors")
+
+    @ManyToMany(mappedBy = "authors",fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Book> books= new ArrayList<>();
     @CreationTimestamp
     private LocalDateTime createdAt;

@@ -1,10 +1,8 @@
 package org.example.librarymanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -20,9 +18,10 @@ import java.util.List;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String categoryName;
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "categories",fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Book> books=new ArrayList<>();
     @CreationTimestamp
     private LocalDateTime createdAt;

@@ -1,5 +1,6 @@
 package org.example.librarymanagement.dao.request;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,16 +15,24 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class BookRequest {
+    @Nullable
     private MultipartFile image;
     @NotBlank
     private String title;
+    @Nullable
     private List<Integer> authorIds;
-
+    @Nullable
     private List<Integer> categoryIds;
+    @Nullable
     private String language;
-    private int totalCopies;
-    private int availableCopies;
+    @Nullable
+    private Integer totalCopies;
+    @Nullable
+    private Integer availableCopies;
+    @Nullable
     private String description;
+    @Nullable
     private String publisher;
+    @Nullable
     private LocalDateTime publishedAt;
 }

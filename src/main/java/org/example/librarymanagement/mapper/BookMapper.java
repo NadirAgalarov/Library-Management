@@ -5,15 +5,16 @@ import org.example.librarymanagement.dao.response.BookResponse;
 import org.example.librarymanagement.model.Author;
 import org.example.librarymanagement.model.Book;
 import org.example.librarymanagement.model.Category;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import org.mapstruct.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",unmappedTargetPolicy = ReportingPolicy.IGNORE,
+    nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
+    nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+        unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface BookMapper {
 
     @Mapping(source="image",target = "imageName",qualifiedByName = "imageToUrl")
@@ -24,8 +25,14 @@ public interface BookMapper {
     @Mapping(target = "imageUrl",source="imageName",qualifiedByName = "nameToUrl")
     BookResponse modelToResponse(Book book);
 
+    @Mapping(source="image",target = "imageName",qualifiedByName = "imageToUrl")
+    @Mapping(source = "authorIds",target = "authors",qualifiedByName ="integerToAuthor" )
+    @Mapping(source = "categoryIds",target = "categories",qualifiedByName ="integerToCategory")
+    void updateBook(@MappingTarget Book book, BookRequest request);
+
     @Named("integerToAuthor")
     static List<Author> integerToAuthor(List<Integer> list){
+
         List<Author> authorList=new ArrayList<>();
         for (Integer i : list) {
             authorList.add(new Author(i));

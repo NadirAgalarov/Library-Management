@@ -72,9 +72,11 @@ public class AuthorServiceImpl implements AuthorService {
     public AuthorResponse update(int id, AuthorRequest request) {
         Author author =authRepo.findById(id).orElseThrow(()-> new
                 AuthorNotFoundException("Author not found for id: "+id));
+        if (request.getImage()!=null && !request.getImage().isEmpty()){
+            deleteImage(author.getImageName());
+            saveImage(request.getImage(),request.getImage().getOriginalFilename());}
         authorMapper.updateModel(author,request);
-        if (request.getImage()!=null && !request.getImage().isEmpty())
-            saveImage(request.getImage(),request.getImage().getOriginalFilename());
+
         Author saved = authRepo.save(author);
         AuthorResponse response = authorMapper.modelToResponse(saved);
         return response;

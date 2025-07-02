@@ -6,5 +6,10 @@ import org.springframework.core.io.Resource;
 
 public interface BookService {
     BookResponse createBook(BookRequest request);
-    public Resource getImage(String imageName);
+    Resource getImage(String imageName);
+    BookResponse getBook(int id);
+
+    BookResponse update(int id, BookRequest request);
+
+    void deleteBook(int id);
 }
