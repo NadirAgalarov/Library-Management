@@ -15,7 +15,7 @@ public interface AuthorMapper {
     @Mapping(source="image",target="imageName",qualifiedByName = "imageNameFromImage")
     Author requestToModel(AuthorRequest authorRequest);
 
-    @Mapping(target="imageUrl",source="imageName")
+    @Mapping(source="imageName",target="imageUrl",qualifiedByName = "imageToUrl")
     AuthorResponse modelToResponse(Author author);
 
     @Mapping(source="image",target="imageName",qualifiedByName = "imageNameFromImage")
@@ -23,6 +23,11 @@ public interface AuthorMapper {
     @Mapping(source = "lastName",target = "lastName", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateModel(@MappingTarget Author author, AuthorRequest request);
 
+
+    @Named("imageToUrl")
+    static String imageToUrl(String imageName){
+        return "http://localhost:8080/author/image/"+imageName;
+    }
     @Named("imageNameFromImage")
     static String getImageName(MultipartFile image){return System.nanoTime()+image.getOriginalFilename();}
 }

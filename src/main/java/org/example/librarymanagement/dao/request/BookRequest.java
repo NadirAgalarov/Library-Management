@@ -22,6 +22,7 @@ public class BookRequest {
     private List<Integer> categoryIds;
     private String language;
     private int totalCopies;
+    private int availableCopies;
     private String description;
     private String publisher;
     private LocalDateTime publishedAt;

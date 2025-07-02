@@ -1,8 +1,6 @@
 package org.example.librarymanagement.model;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,4 +30,8 @@ public class Author {
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    public Author(int id) {
+        this.id = id;
+    }
 }

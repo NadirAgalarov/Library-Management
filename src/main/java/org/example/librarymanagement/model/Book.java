@@ -20,7 +20,7 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String imageUrl;
+    private String imageName;
     private String title;
     @ManyToMany
     @JoinTable(
@@ -30,7 +30,13 @@ public class Book {
     )
     private List<Author> authors;
     @ManyToMany
+    @JoinTable(
+            name = "book_category",
+            joinColumns = @JoinColumn(name = "book_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id",referencedColumnName = "id")
+    )
     private List<Category> categories;
+
     private String language;
     private int availableCopies;
     private int totalCopies;

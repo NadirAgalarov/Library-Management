@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.librarymanagement.model.Author;
 import org.example.librarymanagement.model.Category;
-import org.springframework.core.io.Resource;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,10 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class BookResponse {
-    private Resource image;
+    private int id;
+    private String  imageUrl;
     private String title;
     private List<Author> authors;
-    private List<Category> category;
+    private List<Category> categories;
     private String language;
     private int availableCopies;
     private int totalCopies;
